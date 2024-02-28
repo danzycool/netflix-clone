@@ -1,6 +1,10 @@
 {
   "name": "netflix-clone",
   "version": "0.1.0",
+  "author": {
+    "name": "Daniel Ohinoyi Isah",
+    "email": "bizwithdan@gmail.com"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -34,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0"
   }
 }
