@@ -19,7 +19,7 @@ const Banner = () => {
         fetchData();
     }, []);
 
-    console.log(movie) ///////////////////////
+    console.log("Banner:", movie) ///////////////////////
 
     const truncate = (data, n) => {
         return data?.length > n ? data.substr(0, n - 1) + '...' : data
@@ -28,10 +28,10 @@ const Banner = () => {
     return (
         <header
             className={`relative object-contain bg-cover bg-center h-[448px] text-white
-            bg-[url(https://image.tmdb.org/t/p/original${movie?.backdrop_path})]`}
+            bg-[url(https://image.tmdb.org/t/p/original${movie?.backdrop_path || movie?.poster_path})]`}
 
             style={{
-                backgroundImage: `url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`
+                backgroundImage: `url("https://image.tmdb.org/t/p/original${movie?.backdrop_path || movie?.poster_path}")`
             }}
 
             alt=''
@@ -42,13 +42,13 @@ const Banner = () => {
                 </h1>
                 <div>
                     <button
-                        className='cursor-pointer text-white outline-none bg-my-gray
+                        className='cursor-pointer text-white outline-none bg-myGray
                         border-none font-bold pr-8 pl-8 mr-8 rounded-lg py-2
                         hover:text-black hover:bg-[#e6e6e6] hover:transition-all hover:duration-200'
                     >Play</button>
 
                     <button
-                        className='cursor-pointer text-white outline-none bg-my-gray
+                        className='cursor-pointer text-white outline-none bg-myGray
                         border-none font-bold pr-8 pl-8 mr-8 rounded-lg py-2
                         hover:text-black hover:bg-[#e6e6e6] hover:transition-all hover:duration-200'
                     >My List</button>
