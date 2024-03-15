@@ -1,66 +1,68 @@
 import React, { useState } from 'react';
-import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
-import { IoCheckboxOutline } from "react-icons/io5";
+
+import SignUpForm from '../components/SignUpForm';
+import { Link } from 'react-router-dom';
+
 
 const SignUpPage = () => {
-    const [checked, setChecked] = useState(false)
-
+    const [signIn, setSignIn] = useState(true);
 
     return (
-        <div className='max-w-[450px] p-[70px] mx-auto bg-myDarkBlack -mt-[7%]'>
-            <form className='grid flex-col'>
-                <h1 className='text-[32px] font-semibold mb-8 text-left'>Sign In</h1>
-                <input
-                    placeholder='Email'
-                    type='email'
-                    className='bg-myDarkGray py-4 px-5 rounded mb-6 outline-0'
+        <div
+            className={`
+                relative
+                w-full
+                h-screen
+                md:h-[120vh]
+                bg-cover
+                bg-center
+              
+            `}
+            style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/images/background.jpg)`,
+            }}
+        >
+            <div className='relative w-full h-auto px-10'>
+                <img
+                    className='absolute left-5 lg:left-[150px] 
+                    w-[100px] lg:w-[160px] pt-5'
+                    src="/images/logo.png"
+                    alt='logo'
                 />
-                <input
-                    placeholder='Password'
-                    type='password'
-                    className='bg-myDarkGray py-4 px-5 rounded mb-6 outline-0'
-                />
+
                 <button
-                    type='submit'
-                    className='bg-netflix cursor-pointer font-semibold 
-                    py-4 px-5 rounded mt-5 hover:brightness-75 duration-800'
+                    className='absolute top-5 right-5 lg:right-[150px] 
+                    px-5 py-1.5 text-base border-none hover:brightness-75
+                    duration-800 rounded-md bg-netflix font-semibold cursor-pointer'
                 >
-                    Sign In
+                    <Link to='/'>
+                        Sign In
+                    </Link>
                 </button>
+            </div>
+            <div
+                className='w-full h-screen md:h-[120vh] z-10 bg-myBlack'
+                style={{
+                    backgroundImage: `linear-gradient(
+                            to top,
+                            rgba(0, 0, 0, 0.8) 0,
+                            rgba(0, 0, 0, 0) 60%,
+                            rgba(0, 0, 0, 0.8) 100%
+                        )`
+                }}
+            />
+            <div className='absolute top-[15%] lg:top-[27%] 
+                h-[70vh] w-full items-center 
+                justify-center text-center 
+                p-5 z-10 mx-auto'>
 
-                <div className='flex justify-between items-center text-[13px] mt-3 text-myLightGray'>
-                    <div>
-                        <p className='flex flex-row items-center'>
-                            <input
-                                type='checkbox'
-                                value='rememberMe'
-                                className='text-black focus:bg-white cursor-pointer'
-                            />
-                            <span className='ml-1'>
-                                Remember me
-                            </span>
-                        </p>
-                    </div>
-                    <div className='cursor-pointer hover:underline'><p>Need Help?</p></div>
-                </div>
+                {signIn && (<SignUpForm />)}
+            </div>
 
-                <div className='mt-4 text-left'>
-                    <span className='text-base text-myLightGray font-light'>New to Netflix?</span>
-                    <span className='ml-2 text-base font-normal cursor-pointer hover:underline'>Sign Up Now</span>
-                    <span className='text-base text-myLightGray font-light'>.</span>
-                </div>
+            {/* <div className='w-full h-40 mt-80 bg-myDarkBlack'>
 
-                <div className='mt-4 text-left text-[13px] font-light'>
-                    <span className='text-myLightGray'>
-                        This page is protected by Google reCAPTCHA to ensure you're not a bot.
-                    </span>
-                    <span className='ml-2 font-normal cursor-pointer hover:underline text-[#0071EB]'>
-                        Learn more.
-                    </span>
-
-                </div>
-            </form>
-        </div>
+            </div> */}
+        </div >
     )
 }
 

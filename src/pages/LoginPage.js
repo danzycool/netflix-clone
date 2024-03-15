@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
 
-import SignUpPage from './SignUpPage';
+import SignInForm from '../components/SignInForm';
 
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
-    const [signIn, setSignIn] = useState(true);
+    const [signIn, setSignIn] = useState(false);
     const [error, setError] = useState(false);
-
-    const onSubmit = () => {
-        setSignIn(true);
-    }
-
 
     return (
         <div
@@ -21,11 +16,15 @@ const LoginPage = () => {
                 relative
                 w-full
                 h-screen
+                md:h-[120vh]
                 bg-cover
                 bg-center
-                bg-no-repeat
+              
             `}
-            style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/background.jpg)` }}
+            style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/images/background.jpg)`,
+
+            }}
         >
             <div className='relative w-full h-auto px-10'>
                 <img
@@ -39,13 +38,14 @@ const LoginPage = () => {
                         className='absolute top-5 right-5 lg:right-[150px] 
                     px-5 py-1.5 text-base border-none hover:brightness-75
                     duration-800 rounded-md bg-netflix font-semibold cursor-pointer'
+                        onClick={() => setSignIn(true)}
                     >
                         Sign In
                     </button>
                 )}
             </div>
             <div
-                className='w-full h-screen z-10 bg-myBlack'
+                className='w-full h-screen md:h-[120vh] z-10 bg-myBlack'
                 style={{
                     backgroundImage: `linear-gradient(
                             to top,
@@ -61,7 +61,7 @@ const LoginPage = () => {
                 p-5 z-10 mx-auto'>
 
                 {signIn ? (
-                    <SignUpPage />
+                    <SignInForm mail={email} />
                 ) :
                     (
                         <>
@@ -95,7 +95,7 @@ const LoginPage = () => {
                                                 <button
                                                     className='bg-netflix px-5 hover:brightness-75
                                                     duration-800 py-3 text-2xl font-semibold rounded'
-                                                    onClick={onSubmit}
+                                                    onClick={() => setSignIn(true)}
                                                 >
                                                     <p className='flex justify-center items-center'>Get Started
                                                         <MdKeyboardArrowRight className='text-4xl font-light ml-px' />
@@ -116,6 +116,10 @@ const LoginPage = () => {
                     )
                 }
             </div>
+
+            {/* <div className='w-full h-40 mt-80 bg-myDarkBlack'>
+
+            </div> */}
         </div >
     )
 }
