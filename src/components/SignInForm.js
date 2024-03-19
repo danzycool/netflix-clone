@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import CryptoJS from 'crypto-js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../features/userSlice';
 
 const SignInForm = ({ mail }) => {
     const [email, setEmail] = useState(mail);
     const [password, setPassword] = useState('');
-    const [cypher, setCypher] = useState(null);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const dispatchUser = data => {
+        dispatch(setUser({
+            uid: data.uid,
+            email: data.email
+        }))
+    }
 
     useEffect(() => {
         mail !== '' && validateEmail(mail);
     })
-
-    const register = (e) => {
-        e.preventDefault();
-        auth.createUserWithEmailAndPassword(
-            email, password
-        ).then((authUser) => {
-            console.log('authUser', authUser)
-        }).catch((error) => {
-            alert(error.message)
-        })
-    }
 
     const signIn = (e) => {
         e.preventDefault();
@@ -32,7 +31,8 @@ const SignInForm = ({ mail }) => {
             auth.signInWithEmailAndPassword(
                 email, password
             ).then(authUser => {
-                console.log("User:", authUser)
+                dispatchUser(authUser);
+                navigate('/');
             }).catch(error => alert(error.message))
         }
     }

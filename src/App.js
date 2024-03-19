@@ -33,7 +33,7 @@ function App() {
     <>
       <Routes>
         {
-          user ? (
+          !user ? (
             <>
               <Route path={'/'} element={<LoginPage />} />
               <Route path={'/register'} element={<SignUpPage />} />

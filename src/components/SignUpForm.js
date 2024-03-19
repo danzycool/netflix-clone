@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../features/userSlice';
 
 const SignUpForm = () => {
     const [email, setEmail] = useState('');
@@ -9,13 +11,24 @@ const SignUpForm = () => {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const dispatchUser = data => {
+        dispatch(setUser({
+            uid: data.uid,
+            email: data.email
+        }))
+    }
+
     const register = (e) => {
         e.preventDefault();
         if ((password !== '' && !passwordError && email !== null && !emailError)) {
             auth.createUserWithEmailAndPassword(
                 email, password
             ).then((authUser) => {
-                console.log('authUser', authUser)
+                dispatchUser(authUser);
+                navigate('/');
             }).catch((error) => {
                 alert(error.message)
             })

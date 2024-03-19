@@ -59,9 +59,6 @@ const SignUpPage = () => {
                 {signIn && (<SignUpForm />)}
             </div>
 
-            {/* <div className='w-full h-40 mt-80 bg-myDarkBlack'>
-
-            </div> */}
         </div >
     )
 }
